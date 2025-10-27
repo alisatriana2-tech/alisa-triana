@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Landing Page Profil</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Poppins", sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #74b9ff, #0984e3);
+      color: #2d3436;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      background: #fff;
+      border-radius: 16px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 800px;
+      overflow: hidden;
+    }
+
+    header {
+      background: #0984e3;
+      color: white;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    header h1 {
+      font-size: 2rem;
+      margin-bottom: 10px;
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+    }
+
+    .content {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 30px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .profile-pic {
+      flex: 1 1 200px;
+      text-align: center;
+    }
+
+    .profile-pic img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 5px solid #0984e3;
+    }
+
+    .profile-info {
+      flex: 2 1 300px;
+      padding: 20px;
+    }
+
+    .profile-info h2 {
+      color: #0984e3;
+      margin-bottom: 10px;
+    }
+
+    .profile-info p {
+      margin: 6px 0;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: inline-block;
+      margin-top: 20px;
+      padding: 10px 20px;
+      background: #0984e3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #74b9ff;
+    }
+
+    footer {
+      text-align: center;
+      padding: 15px;
+      background: #f1f2f6;
+      font-size: 0.9rem;
+      color: #636e72;
+    }
+
+    @media (max-width: 600px) {
+      .content {
+        flex-direction: column;
+      }
+      .profile-info {
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Selamat Datang di Profil Saya</h1>
+      <p>Sistem Informasi Profil – HTML, CSS, & JavaScript</p>
+    </header>
+
+    <div class="content">
+      <div class="profile-pic">
+        <img id="fotoProfil" src="https://via.placeholder.com/180" alt="Foto Profil" />
+      </div>
+
+      <div class="profile-info">
+        <h2 id="nama">Nama Anda</h2>
+        <p><strong>Email:</strong> <span id="email">contoh@email.com</span></p>
+        <p><strong>Pekerjaan:</strong> <span id="pekerjaan">Belum diisi</span></p>
+        <button class="btn" onclick="editProfil()">Edit Profil</button>
+      </div>
+    </div>
+
+    <footer>
+      © 2025 Sistem Informasi Profil – Dibuat dengan ❤️ oleh ChatGPT
+    </footer>
+  </div>
+
+  <script>
+    // Ambil data dari localStorage jika ada
+    window.addEventListener("load", () => {
+      const data = JSON.parse(localStorage.getItem("profilLanding")) || {};
+      if (data.nama) document.getElementById("nama").textContent = data.nama;
+      if (data.email) document.getElementById("email").textContent = data.email;
+      if (data.pekerjaan) document.getElementById("pekerjaan").textContent = data.pekerjaan;
+      if (data.foto) document.getElementById("fotoProfil").src = data.foto;
+    });
+
+    // Fungsi edit profil
+    function editProfil() {
+      const nama = prompt("Masukkan nama Anda:", document.getElementById("nama").textContent);
+      const email = prompt("Masukkan email:", document.getElementById("email").textContent);
+      const pekerjaan = prompt("Masukkan pekerjaan:", document.getElementById("pekerjaan").textContent);
+      const foto = prompt("Masukkan URL foto profil (opsional):", document.getElementById("fotoProfil").src);
+
+      if (nama) document.getElementById("nama").textContent = nama;
+      if (email) document.getElementById("email").textContent = email;
+      if (pekerjaan) document.getElementById("pekerjaan").textContent = pekerjaan;
+      if (foto) document.getElementById("fotoProfil").src = foto;
+
+      // Simpan ke localStorage
+      const profil = { nama, email, pekerjaan, foto };
+      localStorage.setItem("profilLanding", JSON.stringify(profil));
+    }
+  </script>
+</body>
+</html>
